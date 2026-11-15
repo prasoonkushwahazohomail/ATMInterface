@@ -7,6 +7,7 @@ It handles:
     5. Transaction history.
  */
 import java.util.Scanner;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ATM{
@@ -60,7 +61,7 @@ public class ATM{
     }
 
     private void showMenu(){
-        int choice;
+        int choice = 0;
 
         do{
             System.out.println("\n========== ATM MENU ==========");
@@ -116,7 +117,7 @@ public class ATM{
             return;
         }
 
-        for(Transaction transaction = history){
+        for(Transaction transaction : history){
             transaction.displayTransaction();
         }
     }
@@ -135,7 +136,7 @@ public class ATM{
         }
 
         currentAccount.withdraw(amount);
-        history.add(new Transaction("Withdrawal", amount, "Cash withdrawn"));
+        history.add(new Transaction("Withdrawal", amount, "Cash withdrawn", LocalDateTime.now()));
         System.out.println("Withdrawal successfull!");
         System.out.println("Remaining balance: " + currentAccount.getBalance() );
     }
@@ -152,10 +153,10 @@ public class ATM{
 
         currentAccount.deposite(amount);
 
-        history.add(new Transaction("Deposit", amount, "Cash deposited"));
+        history.add(new Transaction("Deposit", amount, "Cash deposited", LocalDateTime.now()));
 
         System.out.println("Deposit successful!");
-        System.out.println("Updated balance: " + currentAccount.getBalance())
+        System.out.println("Updated balance: " + currentAccount.getBalance());
     }
 
     private void transfer(){
@@ -179,7 +180,7 @@ public class ATM{
         boolean success = bank.transfer(currentAccount, recipientId, amount);
 
         if(success){
-            history.add(new Transaction("Transfer", amount, " Transfereed to account: "+ recipientId));
+            history.add(new Transaction("Transfer", amount, " Transfereed to account: "+ recipientId, LocalDateTime.now()));
             System.out.println("Transfer successful!");
             System.out.println("Remaining Balance: Rs. " + currentAccount.getBalance());
         }else {

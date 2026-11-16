@@ -4,6 +4,8 @@ public class Bank{
     private ArrayList<Account> accounts; 
 
     public Bank(){
+        // Initialize ArrayList
+        accounts = new ArrayList<>();
         // open some accounts.
         accounts.add(new Account("user1", 1234, "1001", 10000));
         accounts.add(new Account("user2", 5678, "1002", 5000));
